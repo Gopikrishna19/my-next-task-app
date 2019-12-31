@@ -4,17 +4,19 @@
  */
 
 import React from 'react';
-import {StatusBar, Text, View} from 'react-native';
-import {NewButton} from './components/NewButton';
+import {StatusBar} from 'react-native';
+import {Router, Scene} from 'react-native-router-flux';
+import {Main} from './scenes/Main';
 
 export const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <NewButton />
-      <View>
-        <Text>hello</Text>
-      </View>
+      <Router>
+        <Scene key="root">
+          <Scene key="main" component={Main} hideNavBar />
+        </Scene>
+      </Router>
     </>
   );
 };

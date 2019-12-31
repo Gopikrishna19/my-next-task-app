@@ -6,6 +6,7 @@
 import React from 'react';
 import {ActionButton} from 'react-native-material-ui';
 import {safeCall} from '../common/utils';
+import {Actions} from 'react-native-router-flux';
 
 const buttonTypes = {
   ADD_A_SHOPPING_ITEM: 'ADD_A_SHOPPING_ITEM',
@@ -14,7 +15,9 @@ const buttonTypes = {
 
 const buttonHandlers = {
   [buttonTypes.ADD_A_SHOPPING_ITEM]: () => {},
-  [buttonTypes.ADD_A_TODO_ITEM]: () => {},
+  [buttonTypes.ADD_A_TODO_ITEM]: () => {
+    Actions.push('add-todo');
+  },
 };
 
 const handlePress = buttonType => safeCall(buttonHandlers[buttonType])();
