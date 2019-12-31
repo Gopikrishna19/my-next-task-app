@@ -14,9 +14,11 @@ const buttonTypes = {
 };
 
 const buttonHandlers = {
-  [buttonTypes.ADD_A_SHOPPING_ITEM]: () => {},
+  [buttonTypes.ADD_A_SHOPPING_ITEM]: () => {
+    Actions.push('add-shopping-item');
+  },
   [buttonTypes.ADD_A_TODO_ITEM]: () => {
-    Actions.push('add-todo');
+    Actions.push('add-todo-item');
   },
 };
 

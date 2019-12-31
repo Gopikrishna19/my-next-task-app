@@ -6,5 +6,6 @@ module.exports = {
     'no-unused-expressions': 'error',
     'no-unused-labels': 'error',
     'no-unused-vars': 'error',
+    'prefer-const': 'error',
   },
 };
