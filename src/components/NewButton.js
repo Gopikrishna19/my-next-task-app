@@ -3,44 +3,45 @@
  * @flow
  */
 
-import React from 'react';
-import {ActionButton} from 'react-native-material-ui';
-import {safeCall} from '../common/utils';
+import {Button, Fab, Icon, View} from 'native-base';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-const buttonTypes = {
-  ADD_A_SHOPPING_ITEM: 'ADD_A_SHOPPING_ITEM',
-  ADD_A_TODO_ITEM: 'ADD_A_TODO_ITEM',
+const actions = [
+  {
+    name: 'add-shopping-cart',
+    onPress: () => {
+      Actions.push('add-shopping-item');
+    },
+  },
+  {
+    name: 'note-add',
+    onPress: () => {
+      Actions.push('add-todo-item');
+    },
+  },
+];
+
+export const NewButton: () => React$Node = () => {
+  const [isOpen, toggle] = useState(false);
+
+  return (
+    <View style={styles.fabContainer}>
+      <Fab active={isOpen} onPress={() => toggle(!isOpen)}>
+        <Icon name="add" />
+        {actions.map(({name, onPress}) => (
+          <Button onPress={onPress} key={name}>
+            <Icon type="MaterialIcons" name={name} />
+          </Button>
+        ))}
+      </Fab>
+    </View>
+  );
 };
 
-const buttonHandlers = {
-  [buttonTypes.ADD_A_SHOPPING_ITEM]: () => {
-    Actions.push('add-shopping-item');
+const styles = StyleSheet.create({
+  fabContainer: {
+    flex: 1,
   },
-  [buttonTypes.ADD_A_TODO_ITEM]: () => {
-    Actions.push('add-todo-item');
-  },
-};
-
-const handlePress = buttonType => safeCall(buttonHandlers[buttonType])();
-
-export const NewButton: () => React$Node = () => (
-  <ActionButton
-    actions={[
-      {
-        icon: 'add-shopping-cart',
-        label: 'Shopping Item',
-        name: buttonTypes.ADD_A_SHOPPING_ITEM,
-      },
-      {
-        icon: 'note-add',
-        label: 'Todo Item',
-        name: buttonTypes.ADD_A_TODO_ITEM,
-      },
-    ]}
-    name="hi"
-    icon="add"
-    onPress={handlePress}
-    transition="speedDial"
-  />
-);
+});
